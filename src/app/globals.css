@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display-lg: var(--font-space-grotesk);
+  --font-headline-md: var(--font-space-grotesk);
+  --font-label-caps: var(--font-jetbrains-mono);
+  --font-body-base: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  color-scheme: dark;
+  --font-space-grotesk: "Aptos Display", "Segoe UI", "SF Pro Display", "Helvetica Neue", sans-serif;
+  --font-jetbrains-mono: "SFMono-Regular", "JetBrains Mono", "Consolas", "Liberation Mono", monospace;
+  --font-inter: "Inter", "Aptos", "Segoe UI", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(96, 255, 153, 0.08), transparent 24%),
+    radial-gradient(circle at 15% 80%, rgba(218, 185, 255, 0.08), transparent 26%),
+    #08080c;
+  color: #e5e1e5;
+  overflow-x: hidden;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(96, 255, 153, 0.28);
+  color: #f6fcff;
+}
+
+@keyframes blink {
+  from,
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) scale(1.03);
+  }
+}
+
+@keyframes slow-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+.starly-glass {
+  background: rgba(8, 8, 12, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.2em;
+  background-color: #60ff99;
+  animation: blink 0.75s step-end infinite;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.glow-hover {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 20px rgba(96, 255, 153, 0.35);
+  transform: translateY(-1px) scale(1.02);
+}
+
+.lattice-border {
+  border: 1px solid rgba(132, 149, 133, 0.3);
+}
+
+.magnetic-wrap {
+  transition: transform 180ms ease;
+  will-change: transform;
+}
+
+.ambient-orb {
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+.ambient-orb-delayed {
+  animation: float-slow 18s ease-in-out infinite;
+  animation-delay: -6s;
+}
+
+.status-pulse {
+  animation: slow-pulse 3.2s ease-in-out infinite;
 }
